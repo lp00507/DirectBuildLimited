@@ -1,3 +1,716 @@
-<html>
-	<p>Hello World! This is my website</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Direct Build Ltd - Expert Builders in Kent</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #4f4f4f;
+            --accent: #ff8000;
+            --light: #f8f9fa;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--primary);
+        }
+
+        header {
+            background: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo img {
+            height: 60px;
+            width: auto;
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-text h1 {
+            color: var(--accent);
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        .logo-text p {
+            color: var(--primary);
+            font-size: 0.9rem;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            cursor: pointer;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--accent);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--primary);
+            cursor: pointer;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, #2a2a2a 100%);
+            color: var(--white);
+            padding: 6rem 2rem;
+            text-align: center;
+        }
+
+        .hero h2 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--white);
+        }
+
+        .hero .accent {
+            color: var(--accent);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--white);
+            padding: 1rem 2.5rem;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 128, 0, 0.4);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .section {
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        .section h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .section h2 .accent {
+            color: var(--accent);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .service-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(255, 128, 0, 0.2);
+        }
+
+        .service-card h3 {
+            color: var(--accent);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            cursor: pointer;
+            aspect-ratio: 4/3;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-top: 3rem;
+            align-items: center;
+        }
+
+        .about-text h3 {
+            color: var(--accent);
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+
+        .about-text p {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .credentials {
+            background: var(--light);
+            padding: 2rem;
+            border-radius: 10px;
+            border-left: 4px solid var(--accent);
+        }
+
+        .credentials h4 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .credentials ul {
+            list-style: none;
+        }
+
+        .credentials li {
+            padding: 0.5rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .credentials li:before {
+            content: "✓";
+            color: var(--accent);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .contact-form {
+            background: var(--light);
+            padding: 2rem;
+            border-radius: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: inherit;
+            font-size: 1rem;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .contact-item {
+            background: var(--white);
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            border-left: 4px solid var(--accent);
+        }
+
+        .contact-item h4 {
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-item a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .contact-item a:hover {
+            color: var(--accent);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: var(--accent);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 5px;
+            transition: transform 0.3s;
+        }
+
+        .social-links a:hover {
+            transform: translateY(-2px);
+        }
+
+        footer {
+            background: var(--primary);
+            color: var(--white);
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+        .modal-content img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 40px;
+            color: var(--white);
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-wrap: wrap;
+            }
+
+            nav {
+                display: none;
+                width: 100%;
+                padding-top: 1rem;
+            }
+
+            nav.active {
+                display: block;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero h2 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .about-content,
+            .contact-content {
+                grid-template-columns: 1fr;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cpath d='M50 170V80L100 30L150 80V170H120V110H80V170H50Z' fill='none' stroke='%23ff8000' stroke-width='8'/%3E%3Cpath d='M20 170V80L70 30L120 80V170H90V110H50V170H20Z' fill='none' stroke='%23ff8000' stroke-width='8' opacity='0.6'/%3E%3Cpath d='M80 170V80L130 30L180 80V170H150V110H110V170H80Z' fill='none' stroke='%23ff8000' stroke-width='8' opacity='0.4'/%3E%3C/svg%3E" alt="Direct Build Ltd Logo">
+                <div class="logo-text">
+                    <h1>Direct Build Ltd</h1>
+                    <p>Expert Builders in Kent</p>
+                </div>
+            </div>
+            <button class="mobile-menu-btn" onclick="toggleMenu()">☰</button>
+            <nav id="mainNav">
+                <ul>
+                    <li><a onclick="showSection('home')" class="active">Home</a></li>
+                    <li><a onclick="showSection('about')">About Us</a></li>
+                    <li><a onclick="showSection('services')">Services</a></li>
+                    <li><a onclick="showSection('gallery')">Gallery</a></li>
+                    <li><a onclick="showSection('contact')">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="hero">
+        <h2>Building <span class="accent">Excellence</span> in Kent</h2>
+        <p>Over 10 years of trusted construction services - From extensions to complete builds</p>
+        <a class="cta-button" onclick="showSection('contact')">Get A Free Quote</a>
+    </div>
+
+    <div class="container">
+        <!-- Home Section -->
+        <section id="home" class="section active">
+            <h2>Welcome to <span class="accent">Direct Build Ltd</span></h2>
+            <p style="text-align: center; font-size: 1.2rem; margin: 2rem 0;">Your trusted building partner in Kent with over 10 years of experience delivering quality construction projects.</p>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <h3>🏗️ Expert Craftsmanship</h3>
+                    <p>Professional bricklayers and builders with extensive experience in all aspects of construction.</p>
+                </div>
+                <div class="service-card">
+                    <h3>✓ CHAS Accredited</h3>
+                    <p>Fully accredited with CHAS, ensuring the highest standards of health and safety.</p>
+                </div>
+                <div class="service-card">
+                    <h3>⭐ Checkatrade Member</h3>
+                    <p>Proud member of Checkatrade with excellent customer reviews and ratings.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="section">
+            <h2>About <span class="accent">Direct Build Ltd</span></h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Building Excellence Since 2014</h3>
+                    <p>Direct Build Ltd has been serving the Kent area for over 10 years, delivering exceptional construction services to both residential and commercial clients.</p>
+                    <p>Our team of skilled professionals is dedicated to bringing your building projects to life with precision, quality, and attention to detail. From small renovations to complete new builds, we handle every project with the same level of commitment and expertise.</p>
+                    <p>We pride ourselves on our transparent communication, competitive pricing, and unwavering commitment to customer satisfaction.</p>
+                </div>
+                <div class="credentials">
+                    <h4>Our Credentials</h4>
+                    <ul>
+                        <li>Over 10 years of experience</li>
+                        <li>CHAS Accredited</li>
+                        <li>Checkatrade Member</li>
+                        <li>Fully Insured</li>
+                        <li>Experienced Team</li>
+                        <li>Competitive Pricing</li>
+                        <li>Free Quotations</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services" class="section">
+            <h2>Our <span class="accent">Services</span></h2>
+            <p style="text-align: center; font-size: 1.1rem; margin: 2rem 0;">We offer a comprehensive range of building services to meet all your construction needs.</p>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <h3>Bricklayers</h3>
+                    <p>Expert bricklaying services for all types of construction projects, ensuring structural integrity and aesthetic appeal.</p>
+                </div>
+                <div class="service-card">
+                    <h3>House Extensions</h3>
+                    <p>Expand your living space with professionally designed and built extensions that blend seamlessly with your home.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Loft Conversions</h3>
+                    <p>Transform your unused loft space into a beautiful, functional room that adds value to your property.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Building Conversions</h3>
+                    <p>Complete conversion services to repurpose existing structures for new uses with expert planning and execution.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Garage Conversions</h3>
+                    <p>Convert your garage into additional living space, home office, or any room you need with our professional service.</p>
+                </div>
+                <div class="service-card">
+                    <h3>House Builders</h3>
+                    <p>Complete house building service from foundation to finish, bringing your dream home to reality.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Self Build Homes</h3>
+                    <p>Expert support for self-build projects, providing the skills and experience to make your vision a reality.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Conservatories</h3>
+                    <p>Beautiful conservatory construction that adds light, space, and value to your home.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Cavity Walls</h3>
+                    <p>Professional cavity wall construction and insulation services for improved energy efficiency.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Chimneys</h3>
+                    <p>Chimney construction, repair, and maintenance services from experienced professionals.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Patios & Patio Laying</h3>
+                    <p>Create stunning outdoor spaces with our expert patio design and laying services.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Commercial Builders</h3>
+                    <p>Comprehensive commercial construction services for businesses of all sizes.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery Section -->
+        <section id="gallery" class="section">
+            <h2>Our <span class="accent">Work</span></h2>
+            <p style="text-align: center; font-size: 1.1rem; margin: 2rem 0;">Take a look at some of our completed projects showcasing our quality craftsmanship.</p>
+            
+            <div class="gallery-grid" id="galleryGrid">
+                <!-- Gallery items will be inserted here -->
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="section">
+            <h2>Get In <span class="accent">Touch</span></h2>
+            <p style="text-align: center; font-size: 1.1rem; margin: 2rem 0;">Ready to start your project? Contact us today for a free, no-obligation quotation.</p>
+            
+            <div class="contact-content">
+                <div class="contact-form">
+                    <h3 style="color: var(--accent); margin-bottom: 1.5rem;">Send Us A Message</h3>
+                    <form onsubmit="handleSubmit(event)">
+                        <div class="form-group">
+                            <label>Name *</label>
+                            <input type="text" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Email *</label>
+                            <input type="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Phone</label>
+                            <input type="tel">
+                        </div>
+                        <div class="form-group">
+                            <label>Message *</label>
+                            <textarea required></textarea>
+                        </div>
+                        <button type="submit" class="cta-button">Send Message</button>
+                    </form>
+                </div>
+                
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <h4>📞 Phone</h4>
+                        <p><a href="tel:+447803290500">07803 290500</a></p>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <h4>✉️ Email</h4>
+                        <p><a href="mailto:directbuildlimited@yahoo.com">directbuildlimited@yahoo.com</a></p>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <h4>📍 Service Area</h4>
+                        <p>Kent and surrounding areas</p>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <h4>🔗 Find Us Online</h4>
+                        <div class="social-links">
+                            <a href="https://www.yell.com/biz/direct-build-ltd-maidstone-10235896/" target="_blank">Yell</a>
+                            <a href="https://www.facebook.com/share/14Fxa8GsWFx/?mibextid=wwXIfr" target="_blank">Facebook</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Direct Build Ltd. All rights reserved. | CHAS Accredited | Checkatrade Member</p>
+        <p>Registered in Kent, UK | Over 10 Years of Excellence in Construction</p>
+    </footer>
+
+    <!-- Modal for gallery images -->
+    <div id="imageModal" class="modal" onclick="closeModal()">
+        <span class="close-modal">&times;</span>
+        <div class="modal-content">
+            <img id="modalImage" src="" alt="Gallery Image">
+        </div>
+    </div>
+
+    <script>
+        // Gallery images - these would be your actual uploaded images
+        const galleryImages = [
+            { src: 'image1.jpg', alt: 'Building project during construction' },
+            { src: 'image2.jpg', alt: 'Completed two-story extension' },
+            { src: 'image3.jpg', alt: 'Finished rear extension with modern windows' },
+            { src: 'image4.jpg', alt: 'Decorative brick archway feature' },
+            { src: 'image5.jpg', alt: 'External brick steps with handrail' },
+            { src: 'image6.jpg', alt: 'School building extension project' }
+        ];
+
+        function showSection(sectionId) {
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => section.classList.remove('active'));
+            
+            const navLinks = document.querySelectorAll('nav a');
+            navLinks.forEach(link => link.classList.remove('active'));
+            
+            document.getElementById(sectionId).classList.add('active');
+            event.target.classList.add('active');
+            
+            if (window.innerWidth <= 768) {
+                document.getElementById('mainNav').classList.remove('active');
+            }
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function toggleMenu() {
+            document.getElementById('mainNav').classList.toggle('active');
+        }
+
+        function openModal(imgSrc) {
+            document.getElementById('imageModal').classList.add('active');
+            document.getElementById('modalImage').src = imgSrc;
+        }
+
+        function closeModal() {
+            document.getElementById('imageModal').classList.remove('active');
+        }
+
+        function handleSubmit(event) {
+            event.preventDefault();
+            alert('Thank you for your message! We will get back to you as soon as possible.');
+            event.target.reset();
+        }
+
+        // Populate gallery
+        const galleryGrid = document.getElementById('galleryGrid');
+        galleryImages.forEach(image => {
+            const item = document.createElement('div');
+            item.className = 'gallery-item';
+            item.onclick = () => openModal(image.src);
+            item.innerHTML = `<img src="${image.src}" alt="${image.alt}">`;
+            galleryGrid.appendChild(item);
+        });
+    </script>
+</body>
 </html>
