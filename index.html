@@ -408,12 +408,18 @@
         @media (max-width: 768px) {
             .header-content {
                 flex-wrap: wrap;
+                justify-content: space-between;
+            }
+
+            .logo {
+                flex: 1;
             }
 
             nav {
                 display: none;
                 width: 100%;
                 padding-top: 1rem;
+                order: 3;
             }
 
             nav.active {
@@ -427,6 +433,7 @@
 
             .mobile-menu-btn {
                 display: block;
+                flex-shrink: 0;
             }
 
             .hero h2,
